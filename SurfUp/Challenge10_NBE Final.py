@@ -151,8 +151,6 @@ def is_date(string, fuzzy=False):
     except ValueError:
         return False
 
-         
-
 
 # Route 4: /api/v1.0/<start> and /api/v1.0/<start>/<end>
 # Return a JSON list of the minimum temperature, the average temperature, and the maximum temperature
@@ -167,7 +165,7 @@ def min_max_temp_start(start,end=None):
     if  (is_date(start) == True):
         session = Session(engine)
         if not end:
-            end_date = session.query(func.min(Measurement.date)).all()
+            end_date = session.query(func.max(Measurement.date)).all()
             for row in end_date:
                 end = row[0]
 
